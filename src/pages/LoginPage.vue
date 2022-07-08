@@ -40,7 +40,15 @@
 <script>
 export default {
   name: "LoginPage",
+  data() {
+    return {
+      show: false
+    };
+  },
   methods: {
+    showNavBar() {
+      this.show = true;
+    },
     goDashboard() {
       this.$router.push("/dashboard");
     }

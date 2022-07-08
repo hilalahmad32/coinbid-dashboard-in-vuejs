@@ -3,13 +3,13 @@ import Dashboard from "./components/Dashboard.vue";
 import User from "./pages/UserPage.vue";
 import UserWithDrawRequest from "./pages/UserWithDrawRequest.vue";
 import VerifyPage from "./pages/VerifyPage.vue";
+import Login from "./pages/LoginPage.vue";
 
 const routes = [
-  //   {
-  //     path: "/",
-  //     name: "home",
-  //     component: Home,
-  //   },
+  {
+    path: "/",
+    component: Login,
+  },
   {
     path: "/dashboard",
     // name: "dashoa",

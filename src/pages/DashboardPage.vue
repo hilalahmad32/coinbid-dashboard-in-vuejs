@@ -23,7 +23,7 @@ import Sidebar from "../components/Sidebar.vue";
       </div>
       <div>
         <ul>
-          <router-link to="/dashboard">
+          <router-link to="/">
             <li
               class="flex items-center my-3 py-6 px-6 mr-8 cursor-pointer rounded-r-full border-l-4 border-red-500 shadow-md"
             >

@@ -11,7 +11,7 @@ import Sidebar from "../components/Sidebar.vue";
   <div class="flex">
     <!-- sidebar start -->
     <div
-      class="lg:w-[350px] w-[300px] h-screen lg:block bg-white border-r-[#E0E6EC] border-r-2 lg:relative fixed z-40 top-0 left-0 duration-300 ease-in-out"
+      class="lg:w-[350px] w-[300px] h-full lg:block bg-white border-r-[#E0E6EC] border-r-2 lg:relative fixed z-40 top-0 left-0 duration-300 ease-in-out"
       :class="show ? 'block translate-x-0' : 'hidden'"
     >
       <div class="flex justify-center mt-6 mb-2">

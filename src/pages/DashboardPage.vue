@@ -39,8 +39,10 @@ import Sidebar from "../components/Sidebar.vue";
       </div>
       <div>
         <ul>
-          <router-link to="/" active-class=" rounded-r-full border-l-4 border-[#E27425] shadow-md">
-            <li class="flex items-center my-2 py-4 px-6 mr-3 cursor-pointer">
+          <router-link to="/">
+            <li
+              class="flex items-center my-2 py-4 px-6 mr-3 cursor-pointer rounded-r-full border-l-4 border-[#E27425] shadow-md"
+            >
               <svg
                 width="16"
                 height="16"

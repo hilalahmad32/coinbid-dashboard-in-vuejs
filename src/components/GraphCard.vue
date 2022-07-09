@@ -24,6 +24,7 @@
           <svg
             width="686"
             height="380"
+            class="w-full h-full md:w-[90%] px-4"
             viewBox="0 0 686 380"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

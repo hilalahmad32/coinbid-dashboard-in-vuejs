@@ -35,7 +35,7 @@
       <div class="bg-white px-4 py-7 rounded-lg shadow">
         <div class="flex justify-between items-center">
           <div>
-            <div class="font-bold text-xl my-3">TOP ADS WATCHED</div>
+            <div class="font-bold font-mulish text-[19px] tracking-[0.4px] my-3">TOP ADS WATCHED</div>
           </div>
           <div class="font-thin text-md text-blue-600">View details</div>
         </div>

@@ -39,10 +39,8 @@ import Sidebar from "../components/Sidebar.vue";
       </div>
       <div>
         <ul>
-          <router-link to="/">
-            <li
-              class="flex items-center my-2 py-4 px-6 mr-3 cursor-pointer rounded-r-full border-l-4 border-[#E27425] shadow-md"
-            >
+          <router-link to="/" active-class=" rounded-r-full border-l-4 border-[#E27425] shadow-md">
+            <li class="flex items-center my-2 py-4 px-6 mr-3 cursor-pointer">
               <svg
                 width="16"
                 height="16"
@@ -200,7 +198,7 @@ import Sidebar from "../components/Sidebar.vue";
       </div>
     </div>
     <!-- content -->
-    <div class="w-full">
+    <div class="h-full w-full to-[#F5F5F5] from-white bg-gradient-to-r">
       <div class="px-10 flex justify-between items-center w-full py-5 bg-white">
         <div class="flex items-center">
           <h1 class="font-bold text-2xl tracking-[0.3px]">Dashboard</h1>
@@ -248,7 +246,9 @@ import Sidebar from "../components/Sidebar.vue";
           />
         </div>
       </div>
-      <router-view></router-view>
+      <div>
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>

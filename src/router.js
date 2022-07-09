@@ -32,6 +32,7 @@ const routes = [
 export const router = new createRouter({
   history: createWebHistory(),
   routes,
-  linkActiveClass: "active",
+  linkActiveClass:
+    "rounded-r-full border-l-4 border-[#E27425] shadow-md text-[#E27425] text-[16px] ml-4",
   linkExactActiveClass: "exact-active",
 });

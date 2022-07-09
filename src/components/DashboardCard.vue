@@ -40,8 +40,8 @@
             </svg>
           </span>
         </div>
-        <div class="font-bold text-[19px] tracking-[0.4px] px-4 font-mulish">Total Revince</div>
-        <div class="font-bold text-[40px] px-4 pt-3 tacking-[1px]">60</div>
+        <div class="font-bold text-[19px] tracking-[0.4px] px-4 font-mulish">Total Transactions</div>
+        <div class="font-bold text-[40px] px-4 pt-3 tacking-[1px]">16</div>
       </div>
       <div class="p-4 shadow bg-[#FDF4F3] rounded-lg">
         <div class="flex justify-end">
@@ -60,8 +60,8 @@
             </svg>
           </span>
         </div>
-        <div class="font-bold text-[19px] tracking-[0.4px] px-4 font-mulish">Total Revince</div>
-        <div class="font-bold text-[40px] px-4 pt-3 tacking-[1px]">60</div>
+        <div class="font-bold text-[19px] tracking-[0.4px] px-4 font-mulish">Today’s Revenue</div>
+        <div class="font-bold text-[40px] px-4 pt-3 tacking-[1px]">16</div>
       </div>
       <div class="p-4 shadow bg-[#F2F6FC] rounded-lg">
         <div class="flex justify-end">
@@ -80,8 +80,8 @@
             </svg>
           </span>
         </div>
-        <div class="font-bold text-[19px] tracking-[0.4px] px-4 font-mulish">Total Revince</div>
-        <div class="font-bold text-[40px] px-4 pt-3 tacking-[1px]">60</div>
+        <div class="font-bold text-[19px] tracking-[0.4px] px-4 font-mulish">Total Users</div>
+        <div class="font-bold text-[40px] px-4 pt-3 tacking-[1px]">16</div>
       </div>
     </div>
   </div>

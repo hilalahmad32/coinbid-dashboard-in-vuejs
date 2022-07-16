@@ -1,3 +1,15 @@
+
+<script setup>
+import { onMounted } from "vue";
+import { useStore } from "../store";
+
+const store = useStore();
+
+onMounted(() => {
+  store.totalCountUser();
+});
+</script>
+
 <template>
   <div class="bg-white px-4 py-7 rounded-md shadow">
     <div class="font-bold text-[19px] tracking-[0.4px] font-mulish">SALES ACTIVITY</div>
@@ -81,7 +93,7 @@
           </span>
         </div>
         <div class="font-bold text-[19px] tracking-[0.4px] px-4 font-mulish">Total Users</div>
-        <div class="font-bold text-[40px] px-4 pt-3 tacking-[1px]">16</div>
+        <div class="font-bold text-[40px] px-4 pt-3 tacking-[1px]">{{store.totalUser}}</div>
       </div>
     </div>
   </div>
@@ -89,6 +101,9 @@
 <script>
 export default {
   name: "DashboardCardComp",
+  props: {
+    users: Number
+  },
   data() {
     return {
       items: [

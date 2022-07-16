@@ -1,11 +1,10 @@
 <script setup>
-import DashboardPage from './pages/DashboardPage.vue';
-import LoginPage from './pages/LoginPage.vue';
-
+import DashboardPage from "./pages/DashboardPage.vue";
+import LoginPage from "./pages/LoginPage.vue";
 </script>
 
 <template>
-<DashboardPage />
+  <router-view></router-view>
 </template>
 
 <style>

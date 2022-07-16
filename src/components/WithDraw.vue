@@ -10,27 +10,31 @@
         </div>
         <span class="font-semibold font-mulish text-[#9FA2B4] text-[16px] mr-1">Group:</span>
         <span class="ml-2">Support</span>
-        <table class="my-2 w-full border-t" v-for="(index) in 4" :key="index">
-          <tr>
-            <td class="flex items-center py-4">
-              <img
-                src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-                class="w-9 h-9 rounded-full"
-                alt
-              />
-              <span class="ml-4 text-[14px] leading-[20px] font-semibold font-mulish">Daily Recmard</span>
-            </td>
-            <td>
-              <span class="text-gray-400">Bank of India</span>
-            </td>
-            <td>
-              <span class="text-gray-400">4238</span>
-            </td>
-            <td>
-              <span class="text-gray-600 px-6 py-1 rounded-full bg-green-300">Paid</span>
-            </td>
-          </tr>
-        </table>
+        <div class="overflow-x-scroll md:w-full">
+          <table class="my-2 w-full border-t" v-for="(index) in 4" :key="index">
+            <tr>
+              <td class="flex items-center py-4">
+                <img
+                  src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                  class="w-9 h-9 rounded-full"
+                  alt
+                />
+                <span
+                  class="ml-4 text-[14px] leading-[20px] font-semibold font-mulish"
+                >Daily Recmard</span>
+              </td>
+              <td>
+                <span class="text-gray-400">Bank of India</span>
+              </td>
+              <td>
+                <span class="text-gray-400">4238</span>
+              </td>
+              <td>
+                <span class="text-gray-600 px-6 py-1 rounded-full bg-green-300">Paid</span>
+              </td>
+            </tr>
+          </table>
+        </div>
       </div>
       <div class="bg-white px-4 py-7 rounded-lg shadow">
         <div class="flex justify-between items-center">

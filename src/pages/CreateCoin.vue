@@ -76,12 +76,16 @@ export default {
         coins: this.coins,
         price: this.price
       };
-      const res = await axios.post("http://localhost:5000/admin/coin", data, {
-        headers: {
-          "Content-Type": "application/json",
-          admin_access_token: localStorage.getItem("token")
+      const res = await axios.post(
+        "https://coinbid11.herokuapp.com/admin/coin",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            admin_access_token: localStorage.getItem("token")
+          }
         }
-      });
+      );
       if (res.data.success) {
         alert(res.data.message);
         this.coins = "";

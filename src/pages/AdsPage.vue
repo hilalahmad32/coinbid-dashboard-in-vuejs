@@ -41,12 +41,16 @@
                       :key="index"
                       class="space-x-5"
                     >
-                      <img :src="`http://localhost:5000/uploads/${item}`" class="h-10 w-10" alt />
+                      <img
+                        :src="`hhttps://coinbid11.herokuapp.com/uploads/${item}`"
+                        class="h-10 w-10"
+                        alt
+                      />
                     </span>
                   </td>
                   <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                     <video
-                      :src="`http://localhost:5000/uploads/${ad.video}`"
+                      :src="`hhttps://coinbid11.herokuapp.com/uploads/${ad.video}`"
                       controls
                       class="w-10 h-10"
                     ></video>
@@ -108,7 +112,7 @@ export default {
     return {
       show: false,
       ads: [],
-      path: "http://localhost:5000/uploads/"
+      path: "hhttps://coinbid11.herokuapp.com/uploads/"
     };
   },
   methods: {
@@ -120,7 +124,7 @@ export default {
     },
     async getAds() {
       const res = await (
-        await fetch("http://localhost:5000/admin/ads", {
+        await fetch("hhttps://coinbid11.herokuapp.com/admin/ads", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -134,7 +138,7 @@ export default {
     },
     async deleteAds(id) {
       const res = await (
-        await fetch(`http://localhost:5000/admin/ads/${id}`, {
+        await fetch(`hhttps://coinbid11.herokuapp.com/admin/ads/${id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

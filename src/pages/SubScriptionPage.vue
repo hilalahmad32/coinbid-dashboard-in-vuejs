@@ -39,7 +39,11 @@
                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
                   >{{pk.expire_date}}</td>
                   <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    <img :src="'http://localhost:5000/uploads/'+pk.icon" class="w-12 h-12" alt />
+                    <img
+                      :src="'https://coinbid11.herokuapp.com/uploads/'+pk.icon"
+                      class="w-12 h-12"
+                      alt
+                    />
                   </td>
                   <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                     <router-link :to="'/update/subscription/'+pk._id">
@@ -109,7 +113,7 @@ export default {
     },
     async getPackages() {
       const res = await (
-        await fetch("http://localhost:5000/admin/package/plan", {
+        await fetch("https://coinbid11.herokuapp.com/admin/package/plan", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -123,13 +127,16 @@ export default {
     },
     async deletePackage(id) {
       const res = await (
-        await fetch(`http://localhost:5000/admin/package/plan/${id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            admin_access_token: localStorage.getItem("token")
+        await fetch(
+          `https://coinbid11.herokuapp.com/admin/package/plan/${id}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              admin_access_token: localStorage.getItem("token")
+            }
           }
-        })
+        )
       ).json();
       if (res.success) {
         alert(res.message);

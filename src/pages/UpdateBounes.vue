@@ -60,7 +60,7 @@ export default {
     async getData() {
       const res = await (
         await fetch(
-          `http://localhost:5000/admin/bounes/coin/${this.$route.params.id}`,
+          `https://coinbid11.herokuapp.com/admin/bounes/coin/${this.$route.params.id}`,
           {
             method: "PATCH",
             headers: {
@@ -79,7 +79,7 @@ export default {
         coins: this.coins
       };
       const res = await axios.put(
-        `http://localhost:5000/admin/bounes/coin/${this.$route.params.id}`,
+        `https://coinbid11.herokuapp.com/admin/bounes/coin/${this.$route.params.id}`,
         data,
         {
           headers: {

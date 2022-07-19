@@ -69,7 +69,7 @@
                   multiple
                   @change="onFileChange"
                 />
-                <img :src="'http://localhost:5000/uploads/'+old_image" class="h-12 w-12" alt />
+                <img :src="'https://coinbid11.herokuapp.com/uploads/'+old_image" class="h-12 w-12" alt />
               </div>
               <div class="my-2">
                 <button
@@ -113,7 +113,7 @@ export default {
     async getData() {
       const res = await (
         await fetch(
-          `http://localhost:5000/admin/package/plan/${this.$route.params.id}`,
+          `https://coinbid11.herokuapp.com/admin/package/plan/${this.$route.params.id}`,
           {
             method: "PATCH",
             headers: {
@@ -138,7 +138,7 @@ export default {
       formdata.append("price", this.price);
       formdata.append("icon", this.image);
       const res = await axios.put(
-        `http://localhost:5000/admin/package/plan/${this.$route.params.id}`,
+        `https://coinbid11.herokuapp.com/admin/package/plan/${this.$route.params.id}`,
         formdata,
         {
           headers: {

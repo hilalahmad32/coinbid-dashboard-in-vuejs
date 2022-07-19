@@ -20,7 +20,7 @@
               <router-link :to="'/update/banner/'+banner._id">
                 <img
                   class="rounded-lg w-full h-52 object-cover"
-                  :src="'http://localhost:5000/uploads/'+banner.banner"
+                  :src="'https://coinbid11.herokuapp.com/uploads/'+banner.banner"
                   alt
                 />
               </router-link>
@@ -59,7 +59,7 @@ export default {
     return {
       show: false,
       banners: [],
-      path: "http://localhost:5000/uploads/"
+      path: "https://coinbid11.herokuapp.com/uploads/"
     };
   },
   methods: {
@@ -71,7 +71,7 @@ export default {
     },
     async getBanners() {
       const res = await (
-        await fetch("http://localhost:5000/admin/banner", {
+        await fetch("https://coinbid11.herokuapp.com/admin/banner", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export default {
     },
     async deleteBanner(id) {
       const res = await (
-        await fetch(`http://localhost:5000/admin/banner/${id}`, {
+        await fetch(`https://coinbid11.herokuapp.com/admin/banner/${id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

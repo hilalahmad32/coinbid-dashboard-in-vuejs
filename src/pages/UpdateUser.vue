@@ -111,7 +111,7 @@ export default {
     async getUser() {
       const res = await (
         await fetch(
-          `http://localhost:5000/admin/edit/users/${this.$route.params.id}`,
+          `https://coinbid11.herokuapp.com/admin/edit/users/${this.$route.params.id}`,
           {
             method: "PATCH",
             headers: {
@@ -141,7 +141,7 @@ export default {
       };
       const res = await (
         await fetch(
-          `http://localhost:5000/admin/update/users/${this.$route.params.id}`,
+          `https://coinbid11.herokuapp.com/admin/update/users/${this.$route.params.id}`,
           {
             method: "PUT",
             body: JSON.stringify(data),

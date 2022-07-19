@@ -135,7 +135,7 @@ export default {
         formdata.append("images", this.image[i]);
       }
       const res = await axios.post(
-        "http://localhost:5000/admin/ads",
+        "https://coinbid11.herokuapp.com/admin/ads",
         formdata,
         {
           headers: {
@@ -156,7 +156,7 @@ export default {
     },
     async getPackages() {
       const res = await (
-        await fetch("http://localhost:5000/admin/package/plan", {
+        await fetch("https://coinbid11.herokuapp.com/admin/package/plan", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

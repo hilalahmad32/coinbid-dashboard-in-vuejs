@@ -107,7 +107,7 @@ export default {
       formdata.append("expire_date", this.exp);
       formdata.append("icon", this.image);
       const res = await axios.post(
-        "http://localhost:5000/admin/package/plan",
+        "https://coinbid11.herokuapp.com/admin/package/plan",
         formdata,
         {
           headers: {

@@ -28,7 +28,7 @@
                 @change="onFileChange"
               />
             </div>
-            <img :src="'http://localhost:5000/uploads/'+old_image" class="h-12 w-12" alt />
+            <img :src="'https://coinbid11.herokuapp.com/uploads/'+old_image" class="h-12 w-12" alt />
             <input type="hidden" v-model="old_image" />
             <div class="my-2">
               <button
@@ -68,7 +68,7 @@ export default {
     async getData() {
       const res = await (
         await fetch(
-          `http://localhost:5000/admin/banner/${this.$route.params.id}`,
+          `https://coinbid11.herokuapp.com/admin/banner/${this.$route.params.id}`,
           {
             method: "PATCH",
             headers: {
@@ -88,7 +88,7 @@ export default {
       formdata.append("old_image", this.old_image);
       formdata.append("image", this.new_image);
       const res = await axios.put(
-        `http://localhost:5000/admin/banner/${this.$route.params.id}`,
+        `https://coinbid11.herokuapp.com/admin/banner/${this.$route.params.id}`,
         formdata,
         {
           headers: {

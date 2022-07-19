@@ -106,7 +106,7 @@ export default {
     },
     async getCoin() {
       const res = await (
-        await fetch("http://localhost:5000/admin/coin", {
+        await fetch("https://coinbid11.herokuapp.com/admin/coin", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -120,7 +120,7 @@ export default {
     },
     async deleteCoin(id) {
       const res = await (
-        await fetch(`http://localhost:5000/admin/coin/${id}`, {
+        await fetch(`https://coinbid11.herokuapp.com/admin/coin/${id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

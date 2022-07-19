@@ -121,7 +121,7 @@ export default {
     async getData() {
       const res = await (
         await fetch(
-          `http://localhost:5000/admin/ads/${this.$route.params.id}`,
+          `https://coinbid11.herokuapp.com/admin/ads/${this.$route.params.id}`,
           {
             method: "PATCH",
             headers: {
@@ -140,7 +140,7 @@ export default {
       }
       const data = JSON.parse(this.old_image);
       data.map(val => {
-        this.images += `<img src="http://localhost:5000/uploads/${val}" class="h-12 w-12" alt="" />`;
+        this.images += `<img src="https://coinbid11.herokuapp.com/uploads/${val}" class="h-12 w-12" alt="" />`;
       });
     },
     async updateAds() {
@@ -154,7 +154,7 @@ export default {
         formdata.append("images", this.image[i]);
       }
       const res = await axios.put(
-        `http://localhost:5000/admin/ads/${this.$route.params.id}`,
+        `https://coinbid11.herokuapp.com/admin/ads/${this.$route.params.id}`,
         formdata,
         {
           headers: {
@@ -177,7 +177,7 @@ export default {
     },
     async getPackages() {
       const res = await (
-        await fetch("http://localhost:5000/admin/package/plan", {
+        await fetch("https://coinbid11.herokuapp.com/admin/package/plan", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

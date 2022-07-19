@@ -10,7 +10,7 @@ onMounted(() => {
 
 const approved = async id => {
   const res = await (
-    await fetch(`http://localhost:5000/admin/withdraws/request/${id}`, {
+    await fetch(`https://coinbid11.herokuapp.com/admin/withdraws/request/${id}`, {
       method: "PUT",
       headers: {
         admin_access_token: localStorage.getItem("token")
@@ -303,7 +303,7 @@ export default {
     }
     // async getRequest() {
     //   const res = await (
-    //     await fetch("http://localhost:5000/admin/banks", {
+    //     await fetch("https://coinbid11.herokuapp.com/admin/banks", {
     //       method: "GET",
     //       headers: {
     //         "Content-Type": "application/json",

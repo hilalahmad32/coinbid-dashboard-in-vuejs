@@ -97,7 +97,7 @@ export default {
     },
     async getBounes() {
       const res = await (
-        await fetch("http://localhost:5000/admin/bounes/coin", {
+        await fetch("https://coinbid11.herokuapp.com/admin/bounes/coin", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -111,7 +111,7 @@ export default {
     },
     async deleteBounes(id) {
       const res = await (
-        await fetch(`http://localhost:5000/admin/bounes/coin/${id}`, {
+        await fetch(`https://coinbid11.herokuapp.com/admin/bounes/coin/${id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",

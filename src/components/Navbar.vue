@@ -1,3 +1,18 @@
+<script setup>
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useStore } from "../store";
+const store = useStore();
+const router = useRouter();
+
+const drop = ref(false);
+const hideDrop = () => {
+  drop.value = false;
+  store.logout();
+  router.push("/");
+};
+</script>
+
 <template>
   <div class="px-10 flex justify-between items-center w-full py-5 bg-white">
     <div class="flex items-center">
@@ -38,12 +53,26 @@
         </svg>
       </div>
 
-      <h1 class="font-semibold text-md leading-2 tracking-wide mr-4">Hilal Ahmad</h1>
-      <img
-        src="https://img.freepik.com/free-vector/farmer-using-agricultural-technology_53876-120543.jpg?size=338&ext=jpg&ga=GA1.2.428230215.1657184317"
-        class="w-11 h-11 rounded-full border-2 border-[#DFE0EB] p-1"
-        alt="hilal ahmad"
-      />
+      <h1 class="font-semibold text-md leading-2 tracking-wide mr-4">Coin bid</h1>
+      <div class="relative">
+        <img
+          src="https://img.freepik.com/free-vector/farmer-using-agricultural-technology_53876-120543.jpg?size=338&ext=jpg&ga=GA1.2.428230215.1657184317"
+          class="w-11 h-11 rounded-full border-2 border-[#DFE0EB] p-1 cursor-pointer"
+          alt="coinbid"
+          @click="drop =!drop"
+        />
+        <div v-if="drop" class="bg-white rounded-xl shadow-md absolute w-[150px] top-14 right-0">
+          <div class="mx-2 my-1">
+            <div class="my-4 border-b">
+              <h1
+                class="py-1 px-3 my-1 cursor-pointer flex items-center justify-between rounded-md hover:bg-green-600/25"
+              >
+                <span @click="hideDrop">Logout</span>
+              </h1>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -54,13 +83,15 @@ export default {
     showNavBar: { type: Function },
     title: String
   },
+  data() {
+    return {
+      drop: false
+    };
+  },
   methods: {
     showSidebar() {
       this.$emit("sideBar");
     }
-  },
-  mounted() {
-    console.log(this.title);
   }
 };
 </script>

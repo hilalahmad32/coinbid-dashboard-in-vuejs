@@ -42,17 +42,16 @@ export const useStore = defineStore("main", {
     },
 
     async userDelete(id) {
-      const res =
-        await (await fetch(
-          `https://coinbid11.herokuapp.com/admin/delete/users/${id}`,
-          {
-            method: "DELETE",
-            headers: {
-              "Content-Type": "application/json",
-              "admin_access_token": localStorage.getItem("token"),
-            },
+      const res = await (await fetch(
+        `https://coinbid11.herokuapp.com/admin/delete/users/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            "admin_access_token": localStorage.getItem("token"),
           },
-        )).json();
+        },
+      )).json();
       if (res.success) {
         alert(res.message);
       } else {
@@ -72,6 +71,10 @@ export const useStore = defineStore("main", {
       if (res.success) {
         this.banks = res.banks;
       }
+    },
+    async logout() {
+      this.token = "";
+      localStorage.removeItem("token");
     },
   },
 });

@@ -30,7 +30,7 @@ const deleteUser = id => {
     <!-- content -->
     <div class="h-full w-full to-[#F5F5F5] from-white bg-gradient-to-r">
       <Navbar @sideBar="showNavBar" title="Users" />
-      <div class="bg-white rounded-md shadow mx-10 my-5">
+      <div class="bg-white rounded-md shadow mx-10 my-5 overflow-y-scroll lg:overflow-y-hidden">
         <div>
           <table class="w-full">
             <thead class="bg-[#D7D8DB] px-3 py-4">
@@ -143,6 +143,12 @@ export default {
     };
   },
   methods: {
+    showNavBar() {
+      this.show = true;
+    },
+    hidebar() {
+      this.show = false;
+    },
     showNavBar() {
       this.show = true;
     },

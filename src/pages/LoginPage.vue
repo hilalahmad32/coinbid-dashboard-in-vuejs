@@ -36,7 +36,7 @@ const submit = async () => {
               <input
                 type="text"
                 v-model="username"
-                class="border border-gray-400 rounded-2xl text-md font-semibold w-full py-2 px-6 outline-green-600 appearance-none"
+                class="border border-gray-400 rounded-lg text-md font-semibold w-full py-2 px-4 outline-green-600 appearance-none"
                 placeholder="Enter Username"
               />
             </div>
@@ -45,13 +45,13 @@ const submit = async () => {
               <input
                 type="password"
                 v-model="password"
-                class="border outline-green-600 border-gray-400 rounded-2xl text-md font-semibold w-full py-2 px-6 appearance-none"
+                class="border outline-green-600 border-gray-400 rounded-lg text-md font-semibold w-full py-2 px-4 appearance-none"
                 placeholder="Enter Password"
               />
             </div>
             <div class="my-7">
               <button
-                class="border border-gray-400 rounded-full font-bold bg-green-700 text-md text-white w-full py-2 px-6 appearance-none capitalize hover:bg-green-800"
+                class="border border-gray-400 rounded-lg font-bold bg-green-700 text-md text-white w-full py-2 px-6 appearance-none capitalize hover:bg-green-800"
                 type="submit"
               >{{store.isloading ? "Loading ....":'Login'}}</button>
             </div>

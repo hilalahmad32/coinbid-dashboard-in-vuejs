@@ -4,55 +4,33 @@
     <Sidebar :show="show" @hideSidebar="hidebar" />
     <!-- content -->
     <div class="h-full w-full to-[#F5F5F5] from-white bg-gradient-to-r">
-      <Navbar @sideBar="showNavBar" title="Ads" />
+      <Navbar @sideBar="showNavBar" title="Bounes Price" />
       <div class="bg-white rounded-md shadow mx-10 my-5">
         <div>
-          <router-link to="/create/ads">
+          <!-- <router-link to="/create/ads">
             <button
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4"
             >New</button>
-          </router-link>
+          </router-link>-->
           <div class="overflow-y-scroll lg:overflow-y-hidden">
             <table class="w-full">
               <thead class="bg-[#D7D8DB] px-3 py-4">
                 <tr>
-                  <td class="text-left px-6 py-5">Title</td>
+                  <td class="text-left px-6 py-5">Id</td>
                   <td class="text-left px-6 py-5">Coins</td>
-                  <td class="text-left px-6 py-5">Package Title</td>
-                  <td class="text-left px-6 py-5">Image</td>
-                  <td class="text-left px-6 py-5">Video</td>
                   <td class="text-left px-6 py-5">Action</td>
                 </tr>
               </thead>
-              <tbody v-for="(ad, index) in ads" :key="index" class="border-b">
+              <tbody v-for="(boune, index) in bounes" :key="index" class="border-b">
                 <tr>
                   <td
                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
-                  >{{ad.title}}</td>
+                  >{{index + 1}}</td>
                   <td
                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
-                  >{{ad.price}}</td>
-                  <td
-                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
-                  >{{ad.packages.title}}</td>
-                  <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap flex">
-                    <span
-                      v-for="(item, index) in JSON.parse(ad.images)"
-                      :key="index"
-                      class="space-x-5"
-                    >
-                      <img :src="`http://localhost:5000/uploads/${item}`" class="h-10 w-10" alt />
-                    </span>
-                  </td>
+                  >{{boune.coins}}</td>
                   <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    <video
-                      :src="`http://localhost:5000/uploads/${ad.video}`"
-                      controls
-                      class="w-10 h-10"
-                    ></video>
-                  </td>
-                  <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    <router-link :to="'/update/ads/'+ad._id">
+                    <router-link :to="'/update/bounes/coin/'+boune._id">
                       <button>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -70,21 +48,21 @@
                         </svg>
                       </button>
                     </router-link>
-                    <button class="ml -5">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="h-5 w-5 fill-red-500 hover:fill-red-700"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        @click="deleteAds(ad._id)"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-                          clip-rule="evenodd"
-                        />
-                      </svg>
-                    </button>
+                    <!-- <button class="ml-5">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5 fill-red-500 hover:fill-red-700"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      @click="deleteBounes(boune._id)"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    </button>-->
                   </td>
                 </tr>
               </tbody>
@@ -107,8 +85,7 @@ export default {
   data() {
     return {
       show: false,
-      ads: [],
-      path: "http://localhost:5000/uploads/"
+      bounes: []
     };
   },
   methods: {
@@ -118,9 +95,9 @@ export default {
     hidebar() {
       this.show = false;
     },
-    async getAds() {
+    async getBounes() {
       const res = await (
-        await fetch("http://localhost:5000/admin/ads", {
+        await fetch("http://localhost:5000/admin/bounes/coin", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -129,12 +106,12 @@ export default {
         })
       ).json();
       if (res.success) {
-        this.ads = res.ads;
+        this.bounes = res.coins;
       }
     },
-    async deleteAds(id) {
+    async deleteBounes(id) {
       const res = await (
-        await fetch(`http://localhost:5000/admin/ads/${id}`, {
+        await fetch(`http://localhost:5000/admin/bounes/coin/${id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -144,14 +121,14 @@ export default {
       ).json();
       if (res.success) {
         alert(res.message);
-        this.getAds();
+        this.getBounes();
       } else {
         alert(res.message);
       }
     }
   },
   mounted() {
-    this.getAds();
+    this.getBounes();
   }
 };
 </script>

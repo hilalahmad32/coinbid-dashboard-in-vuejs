@@ -12,6 +12,15 @@ import CoinPage from "../pages/CoinPage.vue";
 import CreateCoin from "../pages/CreateCoin.vue";
 import UpdateCoin from "../pages/UpdateCoin.vue";
 import NotFound from "../pages/NotFound.vue";
+import Setting from "../pages/SettingPage.vue";
+import BounesPage from "../pages/BounesPage.vue";
+import UpdateBounes from "../pages/UpdateBounes.vue";
+import BannerPage from "../pages/BannerPage.vue";
+import CreateBanner from "../pages/CreateBanner.vue";
+import UpdateBanner from "../pages/UpdateBanner.vue";
+import CreateSubScription from "../pages/CreateSubScription.vue";
+import SubScriptionPage from "../pages/SubScriptionPage.vue";
+import UpdateSubscription from "../pages/UpdateSubscription.vue";
 
 const routes = [
   {
@@ -31,10 +40,7 @@ const routes = [
     path: "/edit/users/:id",
     component: UpdateUser,
   },
-  {
-    path: "/request",
-    component: UserWithDrawRequest,
-  },
+
   {
     path: "/verify",
     component: VerifyPage,
@@ -67,6 +73,54 @@ const routes = [
     path: "/:catchAll(.*)",
     component: NotFound,
   },
+  {
+    path: "/setting",
+    component: Setting,
+  },
+  {
+    path: "/bounes/coin",
+    component: BounesPage,
+  },
+  {
+    path: "/update/bounes/coin/:id",
+    component: UpdateBounes,
+  },
+  {
+    path: "/banner",
+    component: BannerPage,
+  },
+  {
+    path: "/create/banner",
+    component: CreateBanner,
+  },
+  {
+    path: "/update/banner/:id",
+    component: UpdateBanner,
+  },
+  {
+    path: "/subscription",
+    component: SubScriptionPage,
+  },
+  {
+    path: "/create/subscription",
+    component: CreateSubScription,
+  },
+  {
+    path: "/update/subscription/:id",
+    component: UpdateSubscription,
+  },
+  {
+    path: "/request",
+    component: UserWithDrawRequest,
+  },
+  // {
+  //   path: "/create/subscription",
+  //   component: CreateSubScription,
+  // },
+  // {
+  //   path: "/update/subscription/:id",
+  //   component: UpdateSubscription,
+  // },
 ];
 
 export const router = new createRouter({

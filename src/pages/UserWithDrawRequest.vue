@@ -8,6 +8,22 @@ onMounted(() => {
   store.banks;
 });
 
+const approved = async id => {
+  const res = await (
+    await fetch(`http://localhost:5000/admin/withdraws/request/${id}`, {
+      method: "PUT",
+      headers: {
+        admin_access_token: localStorage.getItem("token")
+      }
+    })
+  ).json();
+  if (res.success) {
+    alert("Request Approved Successfully");
+    store.getBank();
+    store.banks;
+  }
+};
+
 // const deleteUser = id => {
 //   store.userDelete(id);
 //   store.getBank();
@@ -20,7 +36,7 @@ onMounted(() => {
     <Sidebar :show="show" @hideSidebar="hidebar" />
     <!-- content -->
     <div class="h-full w-full to-[#F5F5F5] from-white bg-gradient-to-r">
-      <Navbar @sideBar="showNavBar" />
+      <Navbar @sideBar="showNavBar" title="WithDraw Request" />
       <div class="bg-white rounded-md shadow mx-10 my-5">
         <div class="flex justify-between items-center px-4 py-4">
           <div class="relative">
@@ -200,47 +216,59 @@ onMounted(() => {
             </div>
           </div>
         </div>
-        <table class="w-full">
-          <thead class="bg-[#D7D8DB] px-3 py-4">
-            <tr>
-              <td class="text-left px-6 py-5">User Name</td>
-              <td class="text-left px-6 py-5">Bank Name</td>
-              <td class="text-left px-6 py-5">Account Number</td>
-              <td class="text-left px-6 py-5">IFSC Code</td>
-              <td class="text-left px-6 py-5">Amount</td>
-              <td class="text-left px-6 py-5">Status</td>
-            </tr>
-          </thead>
-          <tbody v-for="(bank, index) in store.banks" :key="index" class="border-b">
-            <tr>
-              <td
-                class="text-[16px] font-[700] text-gray-900 whitespace-nowrap flex items-center px-6 py-5"
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
-                  class="w-8 h-8 rounded-full"
-                  alt
-                />
-                <span class="ml-4 text-[16px] font-semibold font-mulish">{{bank.users.name}}</span>
-              </td>
-              <td
-                class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
-              >{{bank.bank_name}}</td>
-              <td
-                class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
-              >{{bank.account_number}}</td>
-              <td
-                class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
-              >{{bank.ifsc_code}}</td>
-              <td
-                class="py-4 px-6 mt-0 text-sm font-medium text-gray-900 whitespace-nowrap"
-              >{{bank.upi_id}}</td>
-              <td>
-                <span class="text-[#439B15] px-6 py-1 rounded-full bg-[#E0FFEE]">Paid</span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="overflow-y-scroll lg:overflow-y-hidden">
+          <table class="w-full">
+            <thead class="bg-[#D7D8DB] px-3 py-4">
+              <tr>
+                <td class="text-left px-6 py-5">User Name</td>
+                <td class="text-left px-6 py-5">Bank Name</td>
+                <td class="text-left px-6 py-5">Account Number</td>
+                <td class="text-left px-6 py-5">IFSC Code</td>
+                <td class="text-left px-6 py-5">Amount</td>
+                <td class="text-left px-6 py-5">Status</td>
+              </tr>
+            </thead>
+            <tbody v-for="(bank, index) in store.banks" :key="index" class="border-b">
+              <tr>
+                <td
+                  class="text-[16px] font-[700] text-gray-900 whitespace-nowrap flex items-center px-6 py-5"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8dXNlcnN8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60"
+                    class="w-8 h-8 rounded-full"
+                    alt
+                  />
+                  <span class="ml-4 text-[16px] font-semibold font-mulish">{{bank.users.name}}</span>
+                </td>
+                <td
+                  class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
+                >{{bank.bank_name}}</td>
+                <td
+                  class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
+                >{{bank.account_number}}</td>
+                <td
+                  class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
+                >{{bank.ifsc_code}}</td>
+                <td
+                  class="py-4 px-6 mt-0 text-sm font-medium text-gray-900 whitespace-nowrap"
+                >{{bank.amount}}</td>
+                <td>
+                  <span
+                    @click="approved(bank._id)"
+                    class="px-6 py-1 rounded-full bg-[#E0FFEE]"
+                    v-if="bank.status == 'pending'"
+                    :class="bank.status == 'pending'?'bg-red-600/25':''"
+                  >Pending</span>
+                  <span
+                    @click="approved(bank._id)"
+                    class="text-[#439B15] px-6 py-1 rounded-full bg-[#E0FFEE]"
+                    v-if="bank.status == 'Approved'"
+                  >Paid</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -273,7 +301,25 @@ export default {
     hidebar() {
       this.show = false;
     }
+    // async getRequest() {
+    //   const res = await (
+    //     await fetch("http://localhost:5000/admin/banks", {
+    //       method: "GET",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         admin_access_token: localStorage.getItem("token")
+    //       }
+    //     })
+    //   ).json();
+    //   console.log(res);
+    //   if (res.success) {
+    //     this.banks = res.banks;
+    //   }
+    // }
   }
+  // mounted() {
+  //   this.getRequest();
+  // }
 };
 </script>
 <style >

@@ -60,10 +60,17 @@ export default {
   data() {
     return {
       coins: "",
-      price: ""
+      price: "",
+      show: false
     };
   },
   methods: {
+    showNavBar() {
+      this.show = true;
+    },
+    hidebar() {
+      this.show = false;
+    },
     async createBanner() {
       const data = {
         coins: this.coins,

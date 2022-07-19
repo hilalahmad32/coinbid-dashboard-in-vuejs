@@ -1,11 +1,10 @@
 <template >
   <div
-    class="lg:w-[350px] w-[300px] h-full lg:block bg-white border-r-[#E0E6EC] border-r-2 lg:overflow-hidden overflow-y-scroll lg:relative fixed z-40 top-0 left-0 duration-300 ease-in-out transition"
+    class="lg:w-[350px] w-[300px] h-full lg:block bg-white border-r-[#E0E6EC] border-r-2 lg:overflow-y-hidden overflow-y-scroll lg:relative fixed z-40 top-0 left-0 duration-300 ease-in-out transition"
     :class="show ? 'block' : 'hidden'"
   >
     <div class="flex justify-end pt-4 mx-3 cursor-pointer lg:hidden" @click="hideNavbar">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 320 512">
-        <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
         <path
           d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"
         />
@@ -91,7 +90,7 @@
             <span class="ml-4 font-mulish">Withdrawal Requests</span>
           </li>
         </router-link>
-        <router-link class="my-4 mt-6 py-4 mr-3 cursor-pointer" to="/request">
+        <router-link class="my-4 mt-6 py-4 mr-3 cursor-pointer" to="/">
           <li class="flex items-center px-6">
             <svg
               width="16"
@@ -110,7 +109,7 @@
             <span class="ml-4 font-mulish">Withdrawal Posted</span>
           </li>
         </router-link>
-        <router-link class="my-4 mt-6 py-4 mr-3 cursor-pointer" to="/request">
+        <router-link class="my-4 mt-6 py-4 mr-3 cursor-pointer" to="/subscription">
           <li class="flex items-center px-6">
             <svg
               width="14"
@@ -129,7 +128,7 @@
             <span class="ml-4 font-mulish">Subscriptions</span>
           </li>
         </router-link>
-        <router-link class="my-4 mt-6 py-4 mr-3 cursor-pointer" to="/request">
+        <router-link class="my-4 mt-6 py-4 mr-3 cursor-pointer" to="/">
           <li class="flex items-center px-6">
             <svg
               width="14"
@@ -148,7 +147,7 @@
             <span class="ml-4 font-mulish">Live Updates</span>
           </li>
         </router-link>
-        <router-link class="my-4 mt-6 py-4 mr-3 cursor-pointer" to="/banner">
+        <router-link class="my-4 mt-6 py-4 mr-3 cursor-pointer" to="/ads">
           <li class="flex items-center px-6">
             <svg
               width="14"
@@ -163,11 +162,11 @@
                 fill="#999FA4"
               />
             </svg>
-            <span class="ml-4 font-mulish">Banner</span>
+            <span class="ml-4 font-mulish">Ads</span>
           </li>
         </router-link>
         <hr class="w-[200px] container mx-auto border-1 bg-[#E0E6EC]" />
-        <router-link class="mt-10 py-4 mr-3 cursor-pointer" to="/request">
+        <router-link class="mt-10 py-4 mr-3 cursor-pointer" to="/setting">
           <li class="flex items-center px-6">
             <svg
               width="16"

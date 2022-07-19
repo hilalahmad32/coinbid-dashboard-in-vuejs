@@ -4,9 +4,9 @@
     <Sidebar :show="show" @hideSidebar="hidebar" />
     <!-- content -->
     <div class="h-full w-full to-[#F5F5F5] from-white bg-gradient-to-r">
-      <Navbar @sideBar="showNavBar" title="Ads" />
+      <Navbar @sideBar="showNavBar" title="SubScription" />
       <div class="container mx-auto max-w-2xl">
-        <router-link to="/ads">
+        <router-link to="/subscription">
           <button
             class="bg-[#E27425] text-white rounded px-3 py-2 text-[19px] font-bold font-mulish my-4"
           >Go Back</button>
@@ -17,7 +17,7 @@
           class="bg-[#D7D8DB] rounded-t-md px-3 py-3 text-[19px] font-bold font-mulish"
         >Create Ads</div>
         <div class="bg-white px-4 py-3">
-          <form @submit.prevent="createAds">
+          <form @submit.prevent="updatePackage">
             <div>
               <div
                 class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 gap-0 lg:gap-4"
@@ -32,32 +32,30 @@
                   />
                 </div>
                 <div class="my-2">
-                  <label for="price" class="text-md block text-gray-700 font-bold mb-2">Coins:</label>
+                  <label for="price" class="text-md block text-gray-700 font-bold mb-2">Price:</label>
                   <input
                     type="number"
                     v-model="price"
                     class="border border-gray-400 rounded-md text-md font-semibold w-full py-2 px-3 outline-green-600 appearance-none"
-                    placeholder="Enter Coins"
+                    placeholder="Enter Price"
                   />
                 </div>
               </div>
               <div class="my-2">
-                <label for="package" class="text-md block text-gray-700 font-bold mb-2">Package:</label>
-                <select
+                <label for="price" class="text-md block text-gray-700 font-bold mb-2">Expired Date:</label>
+                <input
+                  type="date"
+                  v-model="exp"
                   class="border border-gray-400 rounded-md text-md font-semibold w-full py-2 px-3 outline-green-600 appearance-none"
-                  v-model="pack_id"
-                >
-                  <option value selected disabled>Select Packages</option>
-                  <option
-                    class="flex justify-between items-center"
-                    v-for="(pk, index) in packages"
-                    :key="index"
-                    :value="pk._id"
-                  >
-                    {{pk.title}},
-                    {{pk.price}} Price
-                  </option>
-                </select>
+                  placeholder="Enter Expired Date"
+                />
+                <input
+                  type="text"
+                  v-model="exp"
+                  readonly="true"
+                  class="border border-gray-400 rounded-md text-md font-semibold w-full py-2 px-3 outline-green-600 appearance-none"
+                  placeholder="Enter Expired Date"
+                />
               </div>
               <div class="my-2">
                 <label
@@ -71,16 +69,7 @@
                   multiple
                   @change="onFileChange"
                 />
-              </div>
-              <div class="my-2">
-                <label for="video" class="text-md block text-gray-700 font-bold mb-2">Upload Video:</label>
-                <input
-                  type="file"
-                  class="border outline-green-600 border-gray-400 rounded-md text-md font-semibold w-full py-2 px-3 appearance-none"
-                  placeholder="Upload Video"
-                  multiple
-                  @change="onChangeVideo"
-                />
+                <img :src="'http://localhost:5000/uploads/'+old_image" class="h-12 w-12" alt />
               </div>
               <div class="my-2">
                 <button
@@ -104,11 +93,9 @@ export default {
     return {
       title: "",
       price: "",
-      image: "",
-      video: "",
-      packages: [],
-      pack_id: "",
-      video: "",
+      icon: "",
+      exp: "",
+      old_image: "",
       show: false
     };
   },
@@ -120,22 +107,38 @@ export default {
       this.show = false;
     },
     onFileChange(e) {
-      this.image = e.target.files;
+      this.image = e.target.files[0];
     },
-    onChangeVideo(e) {
-      this.video = e.target.files[0];
+
+    async getData() {
+      const res = await (
+        await fetch(
+          `http://localhost:5000/admin/package/plan/${this.$route.params.id}`,
+          {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              admin_access_token: localStorage.getItem("token")
+            }
+          }
+        )
+      ).json();
+      console.log(res);
+      if (res.success) {
+        this.title = res.packages.title;
+        this.price = res.packages.price;
+        this.exp = res.packages.expire_date;
+        this.old_image = res.packages.icon;
+      }
     },
-    async createAds() {
+    async updatePackage() {
       const formdata = new FormData();
       formdata.append("title", this.title);
+      formdata.append("old_image", this.old_image);
       formdata.append("price", this.price);
-      formdata.append("packages", this.pack_id);
-      formdata.append("video", this.video);
-      for (const i of Object.keys(this.image)) {
-        formdata.append("images", this.image[i]);
-      }
-      const res = await axios.post(
-        "http://localhost:5000/admin/ads",
+      formdata.append("icon", this.image);
+      const res = await axios.put(
+        `http://localhost:5000/admin/package/plan/${this.$route.params.id}`,
         formdata,
         {
           headers: {
@@ -146,34 +149,19 @@ export default {
       );
       if (res.data.success) {
         alert(res.data.message);
-        this.image = "";
+        this.icon = "";
         this.title = "";
         this.price = "";
-        this.$router.push("/ads");
+        this.old_image = "";
+        this.$router.push("/subscription");
       } else {
         alert(res.data.message);
-      }
-    },
-    async getPackages() {
-      const res = await (
-        await fetch("http://localhost:5000/admin/package/plan", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            admin_access_token: localStorage.getItem("token")
-          }
-        })
-      ).json();
-      if (res.success) {
-        this.packages = res.packages;
       }
     }
   },
   components: { Sidebar, Navbar },
   mounted() {
-    this.getPackages();
+    this.getData();
   }
 };
 </script>
-<style >
-</style>

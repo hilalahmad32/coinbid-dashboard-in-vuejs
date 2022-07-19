@@ -16,41 +16,23 @@
             <table class="w-full">
               <thead class="bg-[#D7D8DB] px-3 py-4">
                 <tr>
-                  <td class="text-left px-6 py-5">Title</td>
-                  <td class="text-left px-6 py-5">Coins</td>
-                  <td class="text-left px-6 py-5">Package Title</td>
-                  <td class="text-left px-6 py-5">Image</td>
-                  <td class="text-left px-6 py-5">Video</td>
+                  <td class="text-left px-6 py-5">User Name</td>
+                  <td class="text-left px-6 py-5">Price</td>
+                  <td class="text-left px-6 py-5">Status</td>
                   <td class="text-left px-6 py-5">Action</td>
                 </tr>
               </thead>
-              <tbody v-for="(ad, index) in ads" :key="index" class="border-b">
+              <tbody v-for="(req, index) in withrequests" :key="index" class="border-b">
                 <tr>
                   <td
                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
-                  >{{ad.title}}</td>
+                  >{{req.users}}</td>
                   <td
                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
-                  >{{ad.price}}</td>
+                  >{{req.money}}</td>
                   <td
                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
-                  >{{ad.packages.title}}</td>
-                  <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap flex">
-                    <span
-                      v-for="(item, index) in JSON.parse(ad.images)"
-                      :key="index"
-                      class="space-x-5"
-                    >
-                      <img :src="`http://localhost:5000/uploads/${item}`" class="h-10 w-10" alt />
-                    </span>
-                  </td>
-                  <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    <video
-                      :src="`http://localhost:5000/uploads/${ad.video}`"
-                      controls
-                      class="w-10 h-10"
-                    ></video>
-                  </td>
+                  >{{req.status}}</td>
                   <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
                     <router-link :to="'/update/ads/'+ad._id">
                       <button>
@@ -99,7 +81,7 @@
 import Sidebar from "../components/Sidebar.vue";
 import Navbar from "../components/Navbar.vue";
 export default {
-  name: "BannerPage",
+  name: "WithDrawRequestPage",
   components: {
     Sidebar,
     Navbar
@@ -107,8 +89,7 @@ export default {
   data() {
     return {
       show: false,
-      ads: [],
-      path: "http://localhost:5000/uploads/"
+      withrequests: []
     };
   },
   methods: {
@@ -118,9 +99,9 @@ export default {
     hidebar() {
       this.show = false;
     },
-    async getAds() {
+    async getRequest() {
       const res = await (
-        await fetch("http://localhost:5000/admin/ads", {
+        await fetch("http://localhost:5000/admin/withdraws/request", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -128,30 +109,31 @@ export default {
           }
         })
       ).json();
+      console.log(res);
       if (res.success) {
-        this.ads = res.ads;
-      }
-    },
-    async deleteAds(id) {
-      const res = await (
-        await fetch(`http://localhost:5000/admin/ads/${id}`, {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            admin_access_token: localStorage.getItem("token")
-          }
-        })
-      ).json();
-      if (res.success) {
-        alert(res.message);
-        this.getAds();
-      } else {
-        alert(res.message);
+        this.withrequests = res.ads;
       }
     }
+    // async deleteAds(id) {
+    //   const res = await (
+    //     await fetch(`http://localhost:5000/admin/ads/${id}`, {
+    //       method: "DELETE",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         admin_access_token: localStorage.getItem("token")
+    //       }
+    //     })
+    //   ).json();
+    //   if (res.success) {
+    //     alert(res.message);
+    //     this.getRequest();
+    //   } else {
+    //     alert(res.message);
+    //   }
+    // }
   },
   mounted() {
-    this.getAds();
+    this.getRequest();
   }
 };
 </script>

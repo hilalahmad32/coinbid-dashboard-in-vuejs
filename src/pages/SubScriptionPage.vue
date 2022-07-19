@@ -4,10 +4,10 @@
     <Sidebar :show="show" @hideSidebar="hidebar" />
     <!-- content -->
     <div class="h-full w-full to-[#F5F5F5] from-white bg-gradient-to-r">
-      <Navbar @sideBar="showNavBar" title="Ads" />
+      <Navbar @sideBar="showNavBar" title="Sub Scription" />
       <div class="bg-white rounded-md shadow mx-10 my-5">
         <div>
-          <router-link to="/create/ads">
+          <router-link to="/create/subscription">
             <button
               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4"
             >New</button>
@@ -17,42 +17,32 @@
               <thead class="bg-[#D7D8DB] px-3 py-4">
                 <tr>
                   <td class="text-left px-6 py-5">Title</td>
-                  <td class="text-left px-6 py-5">Coins</td>
-                  <td class="text-left px-6 py-5">Package Title</td>
-                  <td class="text-left px-6 py-5">Image</td>
-                  <td class="text-left px-6 py-5">Video</td>
+                  <td class="text-left px-6 py-5">Price</td>
+                  <td class="text-left px-6 py-5">Ads</td>
+                  <td class="text-left px-6 py-5">Expire Date</td>
+                  <td class="text-left px-6 py-5">Icon</td>
                   <td class="text-left px-6 py-5">Action</td>
                 </tr>
               </thead>
-              <tbody v-for="(ad, index) in ads" :key="index" class="border-b">
-                <tr>
+              <tbody>
+                <tr v-for="(pk, index) in packages" :key="index" class="border-b">
                   <td
                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
-                  >{{ad.title}}</td>
+                  >{{pk.title}}</td>
                   <td
                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
-                  >{{ad.price}}</td>
+                  >{{pk.price}}</td>
                   <td
                     class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
-                  >{{ad.packages.title}}</td>
-                  <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap flex">
-                    <span
-                      v-for="(item, index) in JSON.parse(ad.images)"
-                      :key="index"
-                      class="space-x-5"
-                    >
-                      <img :src="`http://localhost:5000/uploads/${item}`" class="h-10 w-10" alt />
-                    </span>
+                  >{{pk.banners}}</td>
+                  <td
+                    class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"
+                  >{{pk.expire_date}}</td>
+                  <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+                    <img :src="'http://localhost:5000/uploads/'+pk.icon" class="w-12 h-12" alt />
                   </td>
                   <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    <video
-                      :src="`http://localhost:5000/uploads/${ad.video}`"
-                      controls
-                      class="w-10 h-10"
-                    ></video>
-                  </td>
-                  <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
-                    <router-link :to="'/update/ads/'+ad._id">
+                    <router-link :to="'/update/subscription/'+pk._id">
                       <button>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +66,7 @@
                         class="h-5 w-5 fill-red-500 hover:fill-red-700"
                         viewBox="0 0 20 20"
                         fill="currentColor"
-                        @click="deleteAds(ad._id)"
+                        @click="deletePackage(pk._id)"
                       >
                         <path
                           fill-rule="evenodd"
@@ -107,8 +97,7 @@ export default {
   data() {
     return {
       show: false,
-      ads: [],
-      path: "http://localhost:5000/uploads/"
+      packages: []
     };
   },
   methods: {
@@ -118,9 +107,9 @@ export default {
     hidebar() {
       this.show = false;
     },
-    async getAds() {
+    async getPackages() {
       const res = await (
-        await fetch("http://localhost:5000/admin/ads", {
+        await fetch("http://localhost:5000/admin/package/plan", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -129,12 +118,12 @@ export default {
         })
       ).json();
       if (res.success) {
-        this.ads = res.ads;
+        this.packages = res.packages;
       }
     },
-    async deleteAds(id) {
+    async deletePackage(id) {
       const res = await (
-        await fetch(`http://localhost:5000/admin/ads/${id}`, {
+        await fetch(`http://localhost:5000/admin/package/plan/${id}`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
@@ -144,14 +133,14 @@ export default {
       ).json();
       if (res.success) {
         alert(res.message);
-        this.getAds();
+        this.getPackages();
       } else {
         alert(res.message);
       }
     }
   },
   mounted() {
-    this.getAds();
+    this.getPackages();
   }
 };
 </script>

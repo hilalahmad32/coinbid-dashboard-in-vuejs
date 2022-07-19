@@ -4,7 +4,7 @@
     <Sidebar :show="show" @hideSidebar="hidebar" />
     <!-- content -->
     <div class="h-full w-full to-[#F5F5F5] from-white bg-gradient-to-r">
-      <Navbar @sideBar="showNavBar" title="Users" />
+      <Navbar @sideBar="showNavBar" title="Ads" />
       <div class="container mx-auto max-w-2xl">
         <router-link to="/banner">
           <button
@@ -15,31 +15,21 @@
       <div class="bg-white rounded-md shadow my-5 container mx-auto max-w-2xl">
         <div
           class="bg-[#D7D8DB] rounded-t-md px-3 py-3 text-[19px] font-bold font-mulish"
-        >Create Coin</div>
+        >Update Banner</div>
         <div class="bg-white px-4 py-3">
-          <form @submit.prevent="updateCoin">
-            <div
-              class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 md:grid-cols-2 gap-0 lg:gap-4"
-            >
-              <div class="my-2">
-                <label for="coins" class="text-md block text-gray-700 font-bold mb-2">Coins:</label>
-                <input
-                  type="text"
-                  class="border border-gray-400 rounded-2xl text-md font-semibold w-full py-2 px-6 outline-green-600 appearance-none"
-                  placeholder="Enter Coins"
-                  v-model="coins"
-                />
-              </div>
-              <div class="my-2">
-                <label for="price" class="text-md block text-gray-700 font-bold mb-2">Price:</label>
-                <input
-                  type="text"
-                  v-model="price"
-                  class="border border-gray-400 rounded-2xl text-md font-semibold w-full py-2 px-6 outline-green-600 appearance-none"
-                  placeholder="Enter Enter banner Price"
-                />
-              </div>
+          <form @submit.prevent="updateBanner">
+            <div class="my-2">
+              <label for="images" class="text-md block text-gray-700 font-bold mb-2">Upload Images:</label>
+              <input
+                type="file"
+                class="border outline-green-600 border-gray-400 rounded-2xl text-md font-semibold w-full py-2 px-6 appearance-none"
+                placeholder="Upload Image"
+                multiple
+                @change="onFileChange"
+              />
             </div>
+            <img :src="'http://localhost:5000/uploads/'+old_image" class="h-12 w-12" alt />
+            <input type="hidden" v-model="old_image" />
             <div class="my-2">
               <button
                 class="border border-gray-400 rounded-md font-bold bg-green-700 text-md text-white w-full py-2 px-6 appearance-none capitalize hover:bg-green-800"
@@ -59,8 +49,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-      coins: "",
-      price: "",
+      old_image: "",
+      new_image: "",
       show: false
     };
   },
@@ -71,10 +61,14 @@ export default {
     hidebar() {
       this.show = false;
     },
+    onFileChange(e) {
+      this.new_image = e.target.files[0];
+    },
+
     async getData() {
       const res = await (
         await fetch(
-          `http://localhost:5000/admin/coin/${this.$route.params.id}`,
+          `http://localhost:5000/admin/banner/${this.$route.params.id}`,
           {
             method: "PATCH",
             headers: {
@@ -84,31 +78,30 @@ export default {
           }
         )
       ).json();
+      console.log(res);
       if (res.success) {
-        this.coins = res.coins.coins;
-        this.price = res.coins.price;
+        this.old_image = res.banners.banner;
       }
     },
-    async updateCoin() {
-      const data = {
-        coins: this.coins,
-        price: this.price
-      };
+    async updateBanner() {
+      const formdata = new FormData();
+      formdata.append("old_image", this.old_image);
+      formdata.append("image", this.new_image);
       const res = await axios.put(
-        `http://localhost:5000/admin/coin/${this.$route.params.id}`,
-        data,
+        `http://localhost:5000/admin/banner/${this.$route.params.id}`,
+        formdata,
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "multipart/form-data",
             admin_access_token: localStorage.getItem("token")
           }
         }
       );
       if (res.data.success) {
         alert(res.data.message);
-        this.coins = "";
-        this.price = "";
-        this.$router.push("/coin");
+        this.image = "";
+        this.old_image = "";
+        this.$router.push("/banner");
       } else {
         alert(res.data.message);
       }

@@ -152,7 +152,16 @@ export default {
           }
         )
       ).json();
-      console.log(res);
+      if (res.success) {
+        alert(res.message);
+        this.name = "";
+        this.email = "";
+        this.state = "";
+        this.city = "";
+        this.profile = "";
+        this.mobile = "";
+        this.$router.push("/user");
+      }
     }
   },
   mounted() {

@@ -26,26 +26,50 @@
                 <input
                   type="text"
                   class="border border-gray-400 rounded-2xl text-md font-semibold w-full py-2 px-6 outline-green-600 appearance-none"
-                  placeholder="Enter Banner Title"
+                  placeholder="Enter Title"
                   v-model="title"
                 />
               </div>
               <div class="my-2">
-                <label for="price" class="text-md block text-gray-700 font-bold mb-2">Price:</label>
+                <label for="price" class="text-md block text-gray-700 font-bold mb-2">Coins:</label>
                 <input
                   type="text"
                   v-model="price"
                   class="border border-gray-400 rounded-2xl text-md font-semibold w-full py-2 px-6 outline-green-600 appearance-none"
-                  placeholder="Enter Enter banner Price"
+                  placeholder="Enter  Coins"
                 />
               </div>
+            </div>
+            <div class="my-2">
+              <label for="package" class="text-md block text-gray-700 font-bold mb-2">Package:</label>
+              <select
+                class="border border-gray-400 rounded-md text-md font-semibold w-full py-2 px-3 outline-green-600 appearance-none"
+                v-model="new_package"
+              >
+                <option>Select Packages</option>
+                <option
+                  class="flex justify-between items-center"
+                  v-for="(pk, index) in packages"
+                  :key="index"
+                  :value="pk._id"
+                >
+                  {{pk.title}},
+                  {{pk.price}} Price
+                </option>
+              </select>
+              <input
+                type="hidden"
+                v-model="old_package"
+                class="border border-gray-400 rounded-2xl text-md font-semibold w-full py-2 px-6 outline-green-600 appearance-none"
+                placeholder
+              />
             </div>
             <div class="my-2">
               <label for="images" class="text-md block text-gray-700 font-bold mb-2">Upload Images:</label>
               <input
                 type="file"
                 class="border outline-green-600 border-gray-400 rounded-2xl text-md font-semibold w-full py-2 px-6 appearance-none"
-                placeholder="Enter Upload Image"
+                placeholder="Upload Image"
                 multiple
                 @change="onFileChange"
               />
@@ -74,12 +98,22 @@ export default {
       title: "",
       price: "",
       image: "",
+      packages: [],
       video: "",
       old_image: "",
-      images: ""
+      images: "",
+      new_package: "",
+      old_package: "",
+      show: false
     };
   },
   methods: {
+    showNavBar() {
+      this.show = true;
+    },
+    hidebar() {
+      this.show = false;
+    },
     onFileChange(e) {
       this.image = e.target.files;
     },
@@ -102,6 +136,7 @@ export default {
         this.title = res.ads.title;
         this.price = res.ads.price;
         this.old_image = res.ads.images;
+        this.old_package = res.ads.packages;
       }
       const data = JSON.parse(this.old_image);
       data.map(val => {
@@ -113,6 +148,8 @@ export default {
       formdata.append("title", this.title);
       formdata.append("old_image", this.old_image);
       formdata.append("price", this.price);
+      formdata.append("new_package", this.new_package);
+      formdata.append("old_package", this.old_package);
       for (const i of Object.keys(this.image)) {
         formdata.append("images", this.image[i]);
       }
@@ -126,6 +163,7 @@ export default {
           }
         }
       );
+      console.log(res.data);
       if (res.data.success) {
         alert(res.data.message);
         this.image = "";
@@ -136,11 +174,26 @@ export default {
       } else {
         alert(res.data.message);
       }
+    },
+    async getPackages() {
+      const res = await (
+        await fetch("http://localhost:5000/admin/package/plan", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            admin_access_token: localStorage.getItem("token")
+          }
+        })
+      ).json();
+      if (res.success) {
+        this.packages = res.packages;
+      }
     }
   },
   components: { Sidebar, Navbar },
   mounted() {
     this.getData();
+    this.getPackages();
   }
 };
 </script>

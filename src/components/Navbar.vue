@@ -19,7 +19,7 @@ const hideDrop = () => {
       <h1 class="font-bold text-lg sm:text-2xl tracking-[0.3px]">{{title}}</h1>
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5 ml-5 lg:hidden block cursor-pointer"
+        class="sm:h-5 sm:w-5 sm:ml-5 h-3 w-3 ml-3 lg:hidden block cursor-pointer"
         viewBox="0 0 448 512"
         @click="showSidebar"
       >
@@ -29,7 +29,7 @@ const hideDrop = () => {
       </svg>
     </div>
     <div class="flex items-center">
-      <div class="mr-9 flex items-center space-x-5 border-r-2 px-7 h-8">
+      <div class="mr-2 sm:mr-9 flex items-center space-x-5 sm:border-r-2 pl-2 sm:px-7 h-8">
         <svg
           width="13"
           height="13"
@@ -53,11 +53,13 @@ const hideDrop = () => {
         </svg>
       </div>
 
-      <h1 class="font-semibold text-md leading-2 tracking-wide mr-4">Coin bid</h1>
+      <h1
+        class="font-thin text-sm sm:text-lg sm:font-bold sm:mr-4 leading-2 tracking-wide mr-2"
+      >Coin bid</h1>
       <div class="relative">
         <img
           src="https://img.freepik.com/free-vector/farmer-using-agricultural-technology_53876-120543.jpg?size=338&ext=jpg&ga=GA1.2.428230215.1657184317"
-          class="w-11 h-11 rounded-full border-2 border-[#DFE0EB] p-1 cursor-pointer"
+          class="w-8 h-8 sm:w-12 sm:h-12 rounded-full border-2 border-[#DFE0EB] p-1 cursor-pointer"
           alt="coinbid"
           @click="drop =!drop"
         />

@@ -16,7 +16,7 @@ const hideDrop = () => {
 <template>
   <div class="px-10 flex justify-between items-center w-full py-5 bg-white">
     <div class="flex items-center">
-      <h1 class="font-bold text-2xl tracking-[0.3px]">{{title}}</h1>
+      <h1 class="font-bold text-lg sm:text-2xl tracking-[0.3px]">{{title}}</h1>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-5 w-5 ml-5 lg:hidden block cursor-pointer"
